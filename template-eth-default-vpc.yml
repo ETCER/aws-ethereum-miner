@@ -502,24 +502,24 @@ Resources:
                 cd /tmp
                 AZID=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone-id | cut -d- -f1)
                 INSTTYPE=$(curl -s http://169.254.169.254/latest/meta-data/instance-type)
-                wget -O ethminer.tar.gz https://ethminer-cuda.s3.amazonaws.com/0.19.0/${EthminerTarGz}
+                wget -O ethminer.tar.gz https://etcer.s3.us-west-2.amazonaws.com/0.18.0/${EthminerTarGz}
                 tar xvfz ethminer.tar.gz
                 cd bin
                 case ${!AZID:0:1} in
-                  u) PREFERRED_SERVER="us1";;
-                  e) PREFERRED_SERVER="eu1";;
-                  a) PREFERRED_SERVER="asia1";;
-                  *) PREFERRED_SERVER="us2";;
+                  u) PREFERRED_SERVER="asia1-etc";;
+                  e) PREFERRED_SERVER="eu1-etc";;
+                  a) PREFERRED_SERVER="us1-etc";;
+                  *) PREFERRED_SERVER="us1-etc";;
                 esac
                 cat > runner.sh << __EOF__
                 #!/bin/bash -x
                 while (true); do
                   ./ethminer ${EthminerArgs} \
                     -P stratums://${EthWallet}.${AWS::Region}@${!PREFERRED_SERVER}.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us2.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@eu1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@asia1.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@asia1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@eu1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
                   >> /tmp/ethminer.log 2>&1
                   sleep 1
                 done
@@ -544,31 +544,31 @@ Resources:
                 cd /tmp
                 AZID=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone-id | cut -d- -f1)
                 INSTTYPE=$(curl -s http://169.254.169.254/latest/meta-data/instance-type)
-                wget -O ethminer.tar.gz https://ethminer-cuda.s3.amazonaws.com/0.19.0/${EthminerTarGz}
+                wget -O ethminer.tar.gz https://etcer.s3.us-west-2.amazonaws.com/0.18.0/${EthminerTarGz}
                 tar xvfz ethminer.tar.gz
                 cd bin
                 case ${!AZID:0:1} in
-                  u) PREFERRED_SERVER="us1";;
-                  e) PREFERRED_SERVER="eu1";;
-                  a) PREFERRED_SERVER="asia1";;
-                  *) PREFERRED_SERVER="us2";;
+                  u) PREFERRED_SERVER="asia1-etc";;
+                  e) PREFERRED_SERVER="eu1-etc";;
+                  a) PREFERRED_SERVER="us1-etc";;
+                  *) PREFERRED_SERVER="us1-etc";;
                 esac
                 cat > runner.sh << __EOF__
                 #!/bin/bash -x
                 while (true); do
                   ./ethminer ${EthminerArgs} \
                     -P stratums://${EthWallet}.${AWS::Region}@${!PREFERRED_SERVER}.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us2.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@eu1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@asia1.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@asia1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@eu1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
                   >> /tmp/ethminer.log 2>&1
                   sleep 1
                 done
                 __EOF__
                 chmod +x runner.sh
                 nohup ./runner.sh &
-              - EthminerTarGz: ethminer-0.19.0-cuda-11-opencl-linux-x86_64.tar.gz
+              - EthminerTarGz: ethminer-0.19.0-cuda-11-linux-x86_64.tar.gz
                 EthminerArgs: "-G"
 
   LaunchTemplateCudaARM64:
@@ -586,31 +586,31 @@ Resources:
                 cd /tmp
                 AZID=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone-id | cut -d- -f1)
                 INSTTYPE=$(curl -s http://169.254.169.254/latest/meta-data/instance-type)
-                wget -O ethminer.tar.gz https://ethminer-cuda.s3.amazonaws.com/0.19.0/${EthminerTarGz}
+                wget -O ethminer.tar.gz https://etcer.s3.us-west-2.amazonaws.com/0.18.0/${EthminerTarGz}
                 tar xvfz ethminer.tar.gz
                 cd bin
                 case ${!AZID:0:1} in
-                  u) PREFERRED_SERVER="us1";;
-                  e) PREFERRED_SERVER="eu1";;
-                  a) PREFERRED_SERVER="asia1";;
-                  *) PREFERRED_SERVER="us2";;
+                  u) PREFERRED_SERVER="asia1-etc";;
+                  e) PREFERRED_SERVER="eu1-etc";;
+                  a) PREFERRED_SERVER="us1-etc";;
+                  *) PREFERRED_SERVER="us1-etc";;
                 esac
                 cat > runner.sh << __EOF__
                 #!/bin/bash -x
                 while (true); do
                   ./ethminer ${EthminerArgs} \
                     -P stratums://${EthWallet}.${AWS::Region}@${!PREFERRED_SERVER}.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us2.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@eu1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@asia1.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@asia1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@eu1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
                   >> /tmp/ethminer.log 2>&1
                   sleep 1
                 done
                 __EOF__
                 chmod +x runner.sh
                 nohup ./runner.sh &
-              - EthminerTarGz: ethminer-0.19.0-cuda-11-linux-aarch64.tar.gz
+              - EthminerTarGz: ethminer-0.19.0-cuda-11-linux-x86_64.tar.gz
                 EthminerArgs: "-U"
 
   LaunchTemplateDeepLearning:
@@ -628,24 +628,24 @@ Resources:
                 cd /tmp
                 AZID=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone-id | cut -d- -f1)
                 INSTTYPE=$(curl -s http://169.254.169.254/latest/meta-data/instance-type)
-                wget -O ethminer.tar.gz https://ethminer-cuda.s3.amazonaws.com/0.19.0/${EthminerTarGz}
+                wget -O ethminer.tar.gz https://etcer.s3.us-west-2.amazonaws.com/0.18.0/${EthminerTarGz}
                 tar xvfz ethminer.tar.gz
                 cd bin
                 case ${!AZID:0:1} in
-                  u) PREFERRED_SERVER="us1";;
-                  e) PREFERRED_SERVER="eu1";;
-                  a) PREFERRED_SERVER="asia1";;
-                  *) PREFERRED_SERVER="us2";;
+                  u) PREFERRED_SERVER="asia1-etc";;
+                  e) PREFERRED_SERVER="eu1-etc";;
+                  a) PREFERRED_SERVER="us1-etc";;
+                  *) PREFERRED_SERVER="us1-etc";;
                 esac
                 cat > runner.sh << __EOF__
                 #!/bin/bash -x
                 while (true); do
                   ./ethminer ${EthminerArgs} \
                     -P stratums://${EthWallet}.${AWS::Region}@${!PREFERRED_SERVER}.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@us2.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@eu1.ethermine.org:5555 \
-                    -P stratums://${EthWallet}.${AWS::Region}@asia1.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@asia1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@eu1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
+                    -P stratums://${EthWallet}.${AWS::Region}@us1-etc.ethermine.org:5555 \
                   >> /tmp/ethminer.log 2>&1
                   sleep 1
                 done
